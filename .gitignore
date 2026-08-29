@@ -1,0 +1,46 @@
+# --- Secrets ---
+.env
+*.key
+neuroscribe_master.key
+
+# --- Virtual environments ---
+myenv/
+venv/
+.venv/
+env/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# --- Encrypted feature vault / caches ---
+secure_vault/
+test_vault/
+
+# --- Generated meeting artifacts ---
+recordings/
+evaluation_results/
+Prosody_annotations.txt
+prosody_results.json
+prosody_enriched.*
+prosody.vtt
+prosody.srt
+signal_quality_results_*.json
+signal_quality_analysis.png
+*.log
+
+# --- Media (recorded / sample) ---
+*.mp3
+*.mp4
+*.avi
+*.wav
+*.m4a
+*.mov
+*.mkv
+
+# --- OS ---
+.DS_Store
+Thumbs.db

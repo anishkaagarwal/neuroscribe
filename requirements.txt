@@ -1,0 +1,43 @@
+# NeuroscribeAI dependencies
+# Python 3.11 recommended.  Install:  pip install -r requirements.txt
+#
+# NOTE: whisper and whisperX are pulled from Git (no PyPI release with the
+# features used here).  FFmpeg must also be installed and on PATH.
+
+# --- Core numeric / audio ---
+numpy==2.0.2
+scipy==1.16.3
+matplotlib
+librosa==0.11.0
+praat-parselmouth==0.4.6
+soundfile==0.13.1
+sounddevice==0.5.3
+pydub==0.25.1
+
+# --- NLP ---
+textblob==0.19.0
+
+# --- ASR / alignment (installed from Git) ---
+torch==2.8.0
+git+https://github.com/openai/whisper.git
+git+https://github.com/m-bain/whisperX.git
+
+# --- Cloud APIs ---
+groq==0.33.0
+deepgram-sdk==2.12.0
+python-dotenv==1.2.1
+
+# --- Encrypted feature vault ---
+cryptography==46.0.3
+
+# --- Meeting recorder (browser automation + capture) ---
+selenium==4.38.0
+pyautogui==0.9.54
+opencv-python==4.12.0.88
+moviepy==2.2.1
+Pillow==11.3.0
+PyVirtualDisplay==3.0
+
+# --- Optional UIs ---
+flask
+customtkinter==5.2.2
