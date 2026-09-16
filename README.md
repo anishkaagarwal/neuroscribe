@@ -92,3 +92,5 @@ python run_evaluation.py # evaluate the most recent processed meeting
   dimension scores (0–100), no manual adjustments.
 - No secrets, generated media, `recordings/`, `secure_vault/`, or virtualenvs
   are tracked — see `.gitignore`.
+
+<!-- minor doc update -->
