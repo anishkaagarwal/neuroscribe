@@ -81,6 +81,16 @@ python bot_UI.py         # Flask web chatbot  (FLASK_DEBUG=1 for debug mode)
 python run_evaluation.py # evaluate the most recent processed meeting
 ```
 
+## Tests
+
+```bash
+pip install numpy cryptography
+python tests/test_lfv.py   # Secure Feature Vault: store, retrieve, integrity check, delete, key export
+```
+
+CI ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)) runs this on every push and pull request,
+along with a byte-compile and a `ruff` syntax check.
+
 ## Repository
 
 <https://github.com/anishkaagarwal/neuroscribe>
