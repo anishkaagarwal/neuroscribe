@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-DEFAULT_MODEL = "llama-3.3-70b-versatile"
+DEFAULT_MODEL = "openai/gpt-oss-120b"
 TRANSCRIPT_EXTENSIONS = (".txt", ".md", ".log")
 _PROSODY_MARKERS = ("_with_prosody", "_prosody", "_complete_analysis")
 

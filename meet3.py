@@ -264,6 +264,11 @@ class MeetingRecorder:
                 join_btn.click()
                 logger.info("Clicked join button")
             except TimeoutException:
+                # Signed-in accounts can land in the call without a matching
+                # button; treat the presence of the leave-call control as joined.
+                if self.driver.find_elements(By.CSS_SELECTOR, "[aria-label*='Leave call']"):
+                    logger.info("Already in the call (no join button needed)")
+                    return True
                 logger.error("Join button not found")
                 return False
             
@@ -420,7 +425,7 @@ class MeetingRecorder:
             
             # Combine audio with video
             logger.info("Combining audio with video...")
-            final = video.set_audio(audio)
+            final = video.with_audio(audio)
             
             # Export result
             logger.info(f"Writing output file to: {output_path}")
@@ -430,7 +435,6 @@ class MeetingRecorder:
                 str(output_path), 
                 codec="libx264", 
                 audio_codec="aac",
-                verbose=True,  # Show progress
                 threads=4  # Use multiple threads for faster encoding
             )
             

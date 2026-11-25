@@ -28,13 +28,16 @@ INPUT TRANSCRIPT:
 {transcript}
 
 TASKS:
-1. Provide a detailed meeting summary.Make it atleast 3 lines long.
-2. Provide a bullet-style To-Do list with owners (if no such things are avaliable just return what the users talked about).
-3. always give sentances not single words like safe or unsafe
+1. Provide a meeting summary. Scale its length to the transcript: a short
+   transcript gets a short summary. Use only what is actually said in the
+   transcript; never invent participants, agreements, decisions or context.
+2. Provide a bullet-style To-Do list with owners, only for tasks that were
+   actually stated. If none were stated, write "No action items were mentioned."
+3. Always write full sentences, not single words.
 """
 
     response = client.chat.completions.create(
-        model="llama-3.1-8b-instant",
+        model="openai/gpt-oss-20b",
         messages=[{"role": "user", "content": prompt}],
         temperature=0
     )

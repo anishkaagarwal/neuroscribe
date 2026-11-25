@@ -210,9 +210,8 @@ class NeuroscribeAI:
             vault_dir="secure_vault",
             user_password=os.getenv("LFV_PASSWORD")  # Optional: use password from .env
         )
-        self.log_message("🔒 Secure Feature Vault initialized")
-        
         self.create_ui()
+        self.log_message("🔒 Secure Feature Vault initialized")
         
     def create_ui(self):
         """Create the main user interface"""
@@ -677,6 +676,8 @@ class NeuroscribeAI:
                 if not success:
                     self.log_message("❌ Failed to join meeting!")
                     self.recording_active = False
+                    self.start_btn.config(state=tk.NORMAL)
+                    self.stop_btn.config(state=tk.DISABLED)
                     return
                 
                 self.log_message("✅ Joined meeting successfully!")
@@ -782,8 +783,17 @@ class NeuroscribeAI:
     def run_prosody_analysis(self, audio_file):
         """Run prosody extraction on the audio file"""
         try:
+            # The prosody script pip-installs whisper/whisperX (multi-GB) when they
+            # are missing, which silently stalls the pipeline. Skip it instead.
+            import importlib.util
+            missing = [m for m in ("whisper", "whisperx", "librosa", "parselmouth")
+                       if importlib.util.find_spec(m) is None]
+            if missing:
+                self.log_message(f"⏭️ Skipping prosody analysis (not installed: {', '.join(missing)})")
+                return None
+
             self.log_message("🎵 Running prosody analysis (this may take a few minutes)...")
-            
+
             # Find prosody script in current directory
             prosody_script = Path("prosody_extraction_2.py")
             
@@ -1087,7 +1097,7 @@ class NeuroscribeAI:
             try:
                 stats = self.lfv.get_statistics()
                 self.log_message(f"📊 Cache Stats: {stats['cached_meetings']} meetings, "
-                                f"Hit Rate: {stats.get('hit_rate', 0):.1%}")
+                                f"Hit Rate: {stats.get('hit_rate', '0.00%')}")
             except Exception as stats_error:
                 self.log_message(f"⚠️ Could not get cache stats: {stats_error}")
             
@@ -1571,7 +1581,7 @@ class NeuroscribeAI:
                 f"Total Writes: {stats.get('total_writes', 0)}\n"
                 f"Cache Hits: {stats.get('cache_hits', stats.get('hits', 0))}\n"
                 f"Cache Misses: {stats.get('cache_misses', stats.get('misses', 0))}\n"
-                f"Hit Rate: {stats.get('hit_rate', 0):.1%}\n"
+                f"Hit Rate: {stats.get('hit_rate', '0.00%')}\n"
                 f"Total Size: {stats.get('total_size_mb', 0):.2f} MB\n"
                 f"Vault Dir: {stats.get('vault_dir', 'N/A')}"
             )
