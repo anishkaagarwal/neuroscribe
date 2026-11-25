@@ -97,6 +97,9 @@ along with a byte-compile and a `ruff` syntax check.
 
 ## Notes
 
+<img width="960" height="564" alt="image" src="https://github.com/user-attachments/assets/8bc010a6-9454-46a8-8891-eae66a4e616e" />
+
+
 - `Transcript/Transcript.py` is a legacy duplicate of `Transcript.py`; prefer the latter.
 - The `evaluation_suite.py` overall score is the plain mean of the available
   dimension scores (0–100), no manual adjustments.
